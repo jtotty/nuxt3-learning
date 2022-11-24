@@ -35,6 +35,33 @@
 const course = useCourse();
 const route = useRoute();
 
+// (*) definePageMeta has no access outside it's scope
+// Hence why we have to redeclare course, chapter, and lesson
+definePageMeta({
+    validate({ params }) {
+        const course = useCourse();
+        const chapter = course.chapters.find((chapter) => chapter.slug === params.chapterSlug);
+
+        if (!chapter) {
+            throw createError({
+                statusCode: 404,
+                message: 'Chapter not found'
+            });
+        }
+
+        const lesson = chapter.lessons.find((lesson) => lesson.slug === params.lessonSlug);
+
+        if (!lesson) {
+            throw createError({
+                statusCode: 404,
+                message: 'Lesson not found'
+            });
+        }
+
+        return true;
+    }
+});
+
 if (route.params.lessonSlug === '3-typing-component-events') {
     console.log(route.params.paramthatdoesnotexist.capitalizeIsNotAMethod());
 }
@@ -43,23 +70,9 @@ const chapter = computed(() => {
     return course.chapters.find((chapter) => chapter.slug === route.params.chapterSlug);
 });
 
-if (!chapter.value) {
-    throw createError({
-        statusCode: 404,
-        message: 'Chapter not found'
-    });
-}
-
 const lesson = computed(() => {
     return chapter.value.lessons.find((lesson) => lesson.slug === route.params.lessonSlug);
 });
-
-if (!lesson.value) {
-    throw createError({
-        statusCode: 404,
-        message: 'Lesson not found'
-    });
-}
 
 const title = computed(() => {
     return `${lesson.value.title} - ${course.title}`;
