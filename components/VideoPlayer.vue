@@ -1,6 +1,6 @@
 <template>
   <iframe
-    width="560"
+    width="465"
     height="315"
     :src="`https://player.vimeo.com/video/${props.videoId}`"
     title="Video player"
@@ -12,9 +12,9 @@
 
 <script setup>
 const props = defineProps({
-  	videoId: {
-      type: Number,
-      requried: true,
-    },
+  videoId: {
+    type: Number,
+    requried: true,
+  },
 });
 </script>
