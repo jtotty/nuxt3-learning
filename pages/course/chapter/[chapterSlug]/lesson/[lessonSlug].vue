@@ -19,16 +19,17 @@
 </template>
 
 <script setup>
-const course = useCourse();
+const course = await useCourse();
 const route = useRoute();
 const { chapterSlug, lessonSlug } = route.params;
 const lesson = await useLesson(chapterSlug, lessonSlug);
 
 definePageMeta({
   middleware: [
-    function ({ params }, from) {
-      const course = useCourse();
-      const chapter = course.chapters.find((chapter) => chapter.slug === params.chapterSlug);
+    async function ({ params }, from) {
+      const course = await useCourse();
+
+      const chapter = course.value.chapters.find((chapter) => chapter.slug === params.chapterSlug);
 
       if (!chapter) {
         return abortNavigation(
@@ -55,10 +56,10 @@ definePageMeta({
 });
 
 const chapter = computed(() => {
-  return course.chapters.find((chapter) => chapter.slug === route.params.chapterSlug);
+  return course.value.chapters.find((chapter) => chapter.slug === route.params.chapterSlug);
 });
 
-const title = computed(() => `${lesson.value.title} - ${course.title}`);
+const title = computed(() => `${lesson.value.title} - ${course.value.title}`);
 
 useHead({ title });
 
