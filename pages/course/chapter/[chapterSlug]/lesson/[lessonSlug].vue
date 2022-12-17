@@ -8,12 +8,10 @@
       <NuxtLink v-if="lesson.sourceUrl" class="font-normal text-md text-gray-500" :to="lesson.sourceUrl">
         Download Source Code
       </NuxtLink>
-
       <NuxtLink v-if="lesson.downloadUrl" class="font-normal text-md text-gray-500" :to="lesson.downloadUrl">
         Download Video
       </NuxtLink>
     </div>
-
     <VideoPlayer v-if="lesson.videoId" :videoId="lesson.videoId" />
     <p>{{ lesson.text }}</p>
     <LessonCompleteButton :model-value="isLessonComplete" @update:model-value="toggleComplete" />
@@ -23,50 +21,44 @@
 <script setup>
 const course = useCourse();
 const route = useRoute();
+const { chapterSlug, lessonSlug } = route.params;
+const lesson = await useLesson(chapterSlug, lessonSlug);
 
-// (*) definePageMeta has no access outside it's scope
-// Hence why we have to redeclare course, chapter, and lesson
 definePageMeta({
   middleware: [
-    function (to, from) {
+    function ({ params }, from) {
       const course = useCourse();
-      const chapter = course.chapters.find((chapter) => chapter.slug === to.params.chapterSlug);
+      const chapter = course.chapters.find((chapter) => chapter.slug === params.chapterSlug);
 
       if (!chapter) {
-        throw abortNavigation(createError({
-          statusCode: 404,
-          message: 'Chapter not found'
-        }));
+        return abortNavigation(
+          createError({
+            statusCode: 404,
+            message: 'Chapter not found'
+          })
+        );
       }
 
-      const lesson = chapter.lessons.find((lesson) => lesson.slug === to.params.lessonSlug);
+      const lesson = chapter.lessons.find((lesson) => lesson.slug === params.lessonSlug);
 
       if (!lesson) {
-        throw abortNavigation(createError({
-          statusCode: 404,
-          message: 'Lesson not found'
-        }));
+        return abortNavigation(
+          createError({
+            statusCode: 404,
+            message: 'Lesson not found'
+          })
+        );
       }
     },
     'auth'
   ]
 });
 
-if (route.params.lessonSlug === '3-typing-component-events') {
-  console.log(route.params.paramthatdoesnotexist.capitalizeIsNotAMethod());
-}
-
 const chapter = computed(() => {
   return course.chapters.find((chapter) => chapter.slug === route.params.chapterSlug);
 });
 
-const lesson = computed(() => {
-  return chapter.value.lessons.find((lesson) => lesson.slug === route.params.lessonSlug);
-});
-
-const title = computed(() => {
-  return `${lesson.value.title} - ${course.title}`;
-});
+const title = computed(() => `${lesson.value.title} - ${course.title}`);
 
 useHead({ title });
 
