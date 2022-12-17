@@ -19,7 +19,7 @@ Improved error detection in your IDE and at build time
 Safer and less stressful refactoring
 More focused and accurate IDE autocompletion
 
-We also answer the question: “Are there any cases when you wouldn’t want to use TypeScript?”.`,
+We also answer the question: “Are there any cases when you wouldn\'t want to use TypeScript?”.`,
         },
         {
           title: 'TypeScript in Vue Components',
@@ -69,7 +69,7 @@ We also answer the question: “Are there any cases when you wouldn’t want to 
           sourceUrl:
             'https://vueschool.io/lessons/declaring-and-typing-component-props',
           videoId: 688500728,
-          text: `In this lesson, we’ll examine how to use TypeScript to define types for Vue component props. Along the way, you’ll also get a first hand look at the great DX this provides for interacting with those components.`,
+          text: `In this lesson, we'll examine how to use TypeScript to define types for Vue component props. Along the way, you'll also get a first hand look at the great DX this provides for interacting with those components.`,
         },
         {
           title: 'TypeScript in Vue Components',
@@ -119,7 +119,7 @@ We also answer the question: “Are there any cases when you wouldn’t want to 
           sourceUrl:
             'https://vueschool.io/lessons/declaring-and-typing-component-props',
           videoId: 688500728,
-          text: `In this lesson, we’ll examine how to use TypeScript to define types for Vue component props. Along the way, you’ll also get a first hand look at the great DX this provides for interacting with those components.`,
+          text: `In this lesson, we'll examine how to use TypeScript to define types for Vue component props. Along the way, you'll also get a first hand look at the great DX this provides for interacting with those components.`,
         },
         {
           title: 'TypeScript in Vue Components',
