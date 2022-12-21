@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../node_modules/.prisma.client/index.js';
 
 const prisma = new PrismaClient();
 
-export const seed = async () => {
+async function seed() {
   await prisma.course.create({
     data: {
       title: 'TypeScript with Vue.js 3',
@@ -12,7 +12,7 @@ export const seed = async () => {
             title: 'Chapter 1',
             slug: '1-chapter-1',
             number: 1,
-            lessons: {
+            lesson: {
               create: [
                 {
                   title:
@@ -57,7 +57,7 @@ export const seed = async () => {
             title: 'Chapter 2',
             slug: '2-chapter-2',
             number: 2,
-            lessons: {
+            lesson: {
               create: [
                 {
                   title:
@@ -110,7 +110,7 @@ export const seed = async () => {
             title: 'Chapter 3',
             slug: '3-chapter-3',
             number: 3,
-            lessons: {
+            lesson: {
               create: [
                 {
                   title:
