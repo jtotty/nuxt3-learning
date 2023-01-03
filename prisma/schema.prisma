@@ -5,7 +5,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/.prisma.client" // This is specific for pnpm
+  output   = "../node_modules/.prisma/client" // This is specific for pnpm
 }
 
 model Course {
