@@ -1,4 +1,4 @@
-import { PrismaClient } from '../node_modules/.prisma.client/index.js';
+import { PrismaClient } from '../node_modules/.prisma/client/index.js'
 
 const prisma = new PrismaClient();
 
@@ -12,7 +12,7 @@ async function seed() {
             title: 'Chapter 1',
             slug: '1-chapter-1',
             number: 1,
-            lesson: {
+            lessons: {
               create: [
                 {
                   title:
@@ -57,7 +57,7 @@ async function seed() {
             title: 'Chapter 2',
             slug: '2-chapter-2',
             number: 2,
-            lesson: {
+            lessons: {
               create: [
                 {
                   title:
@@ -110,7 +110,7 @@ async function seed() {
             title: 'Chapter 3',
             slug: '3-chapter-3',
             number: 3,
-            lesson: {
+            lessons: {
               create: [
                 {
                   title:

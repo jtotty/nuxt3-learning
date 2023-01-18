@@ -1,11 +1,13 @@
 datasource db {
-  url      = env("DATABASE_URL")
-  provider = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider          = "postgresql"
 }
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../node_modules/.prisma/client" // This is specific for pnpm
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64"]
+  output        = "../node_modules/.prisma/client" // This is specific for pnpm
 }
 
 model Course {
@@ -21,10 +23,10 @@ model Chapter {
   title     String
   slug      String
   number    Int
-  lesson    Lesson[]
+  lessons   Lesson[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Course    Course   @relation(fields: [courseId], references: [id])
+  course    Course   @relation(fields: [courseId], references: [id])
   courseId  Int
 }
 
@@ -39,6 +41,6 @@ model Lesson {
   sourceUrl   String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Chapter     Chapter  @relation(fields: [chapterId], references: [id])
+  chapter     Chapter  @relation(fields: [chapterId], references: [id])
   chapterId   Int
 }
