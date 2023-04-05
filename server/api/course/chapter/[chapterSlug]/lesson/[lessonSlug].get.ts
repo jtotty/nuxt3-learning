@@ -3,7 +3,7 @@ import protectRoute from '~/server/utils/protectRoute';
 
 const prisma = new PrismaClient();
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: any) => {
   if (event.context.params.chapterSlug !== '1-chapter-1') {
     protectRoute(event);
   }
