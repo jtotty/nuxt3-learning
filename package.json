@@ -14,8 +14,13 @@
     "@nuxtjs/tailwindcss": "^6.2.0",
     "@prisma/client": "^4.9.0",
     "@tailwindcss/typography": "^0.5.9",
+    "@types/node": "^18.15.11",
     "@vueuse/core": "^9.11.0",
     "@vueuse/nuxt": "^9.11.0",
     "nuxt": "3.0.0"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.7",
+    "pinia": "^2.0.33"
   }
 }
